@@ -36,15 +36,15 @@ class MainActivity : ComponentActivity() {
 //
 //}
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
+//@Composable
+//fun Greeting(name: String) {
+//    Text(text = "Hello $name!")
+//}
+//
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
     Eat10Theme {
-        Greeting("Android")
+        SplashActivity()
     }
 }

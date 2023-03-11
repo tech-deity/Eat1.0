@@ -9,7 +9,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -18,9 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.eat10.R
 import com.example.eat10.ui.theme.SF_Round
 import com.example.eat10.ui.theme.TealOrange
+
 
 @Composable
 fun SplashActivity(){
@@ -32,7 +34,7 @@ fun SplashActivity(){
         Column {
             TopExp()
             RandomImages()
-            GetStarted()
+
         }
     }
 
@@ -41,6 +43,7 @@ fun SplashActivity(){
 @Composable
 fun TopExp(){
     Box(
+
         ){
 
         Column(modifier = Modifier.padding(top = 44.dp , start = 34.dp))
@@ -65,42 +68,67 @@ fun TopExp(){
 @Composable
 fun RandomImages(){
 
-    Row(){
-        Image(painter = painterResource(id = R.drawable.tff2) ,
-            contentDescription = "random image one",
-            modifier = Modifier.size(250.dp)
-        )
+    ConstraintLayout(
 
-        Image(painter = painterResource(id = R.drawable.tff1) ,
-            contentDescription = "random image two",
-            modifier = Modifier.size(300.dp)
-        )
-    }
+    ) {
+        val (one , two ) = createRefs()
 
-}
+        Row(
+                modifier = Modifier
+               .constrainAs(one){},
+            horizontalArrangement = Arrangement.Center) {
+            ConstraintLayout() {
+                val (img1, img2) = createRefs()
+                Image(painter = painterResource(id = R.drawable.tff2),
+                    contentDescription = "random image one",
+                    modifier = Modifier
+                        .size(220.dp)
+                        .constrainAs(img1) {}
+                )
 
-@Composable
-fun GetStarted()
-{
+                Image(painter = painterResource(id = R.drawable.tff1),
+                    contentDescription = "random image two",
+                    modifier = Modifier
+                        .size(200.dp)
+                        .constrainAs(img2) {
+                            start.linkTo(img1.end)
+                        }
+                )
+            }
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
+        }
 
-    ){
         Button(
 
-            onClick = { /*TODO*/ },
+            onClick = { /*TODO*/
+
+                      },
             shape = RoundedCornerShape(30.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-            modifier = Modifier.width(300.dp)
+            modifier = Modifier
+                .width(350.dp)
+                .height(50.dp)
+                .padding(start = 30.dp )
+
+                .constrainAs(two){
+                    top.linkTo(one.bottom,40.dp)
+                }
+
+
         ) {
             Text(text = "Get Started"
                 , color = TealOrange)
         }
 
+
+
+
     }
 
+
 }
+
+
 
 @Preview(name="SplashScreen" , showSystemUi = true)
 @Composable
