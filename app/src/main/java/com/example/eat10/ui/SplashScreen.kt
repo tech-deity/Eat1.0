@@ -25,7 +25,7 @@ import com.example.eat10.ui.theme.TealOrange
 
 
 @Composable
-fun SplashActivity(){
+fun SplashScreenActivity(){
 
 
     Box(modifier = Modifier
@@ -102,16 +102,17 @@ fun RandomImages(){
 
             onClick = { /*TODO*/
 
+
                       },
             shape = RoundedCornerShape(30.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
             modifier = Modifier
                 .width(350.dp)
                 .height(50.dp)
-                .padding(start = 30.dp )
+                .padding(start = 30.dp)
 
-                .constrainAs(two){
-                    top.linkTo(one.bottom,40.dp)
+                .constrainAs(two) {
+                    top.linkTo(one.bottom, 40.dp)
                 }
 
 
@@ -133,5 +134,5 @@ fun RandomImages(){
 @Preview(name="SplashScreen" , showSystemUi = true)
 @Composable
 fun PreviewSplashActivity(){
-    SplashActivity()
+   SplashScreenActivity()
 }
