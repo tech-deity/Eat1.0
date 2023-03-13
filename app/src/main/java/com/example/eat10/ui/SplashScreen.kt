@@ -19,21 +19,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import com.example.eat10.R
+import com.example.eat10.Screens
 import com.example.eat10.ui.theme.SF_Round
 import com.example.eat10.ui.theme.TealOrange
 
 
 @Composable
-fun SplashScreenActivity(){
+fun SplashScreenActivity(navController: NavController) {
 
 
-    Box(modifier = Modifier
-        .background(TealOrange)
-        .fillMaxSize()){
+    Box(
+        modifier = Modifier
+            .background(TealOrange)
+            .fillMaxSize()
+    ) {
         Column {
             TopExp()
-            RandomImages()
+            RandomImages(navController)
 
         }
     }
@@ -66,17 +70,18 @@ fun TopExp(){
 }
 
 @Composable
-fun RandomImages(){
+fun RandomImages(navController: NavController) {
 
     ConstraintLayout(
 
     ) {
-        val (one , two ) = createRefs()
+        val (one, two) = createRefs()
 
         Row(
-                modifier = Modifier
-               .constrainAs(one){},
-            horizontalArrangement = Arrangement.Center) {
+            modifier = Modifier
+                .constrainAs(one) {},
+            horizontalArrangement = Arrangement.Center
+        ) {
             ConstraintLayout() {
                 val (img1, img2) = createRefs()
                 Image(painter = painterResource(id = R.drawable.tff2),
@@ -102,8 +107,8 @@ fun RandomImages(){
 
             onClick = { /*TODO*/
 
-
-                      },
+                navController.navigate(Screens.Login.route)
+            },
             shape = RoundedCornerShape(30.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
             modifier = Modifier
@@ -117,22 +122,16 @@ fun RandomImages(){
 
 
         ) {
-            Text(text = "Get Started"
-                , color = TealOrange)
+            Text(
+                text = "Get Started", color = TealOrange
+            )
         }
-
-
 
 
     }
 
-
 }
 
 
 
-@Preview(name="SplashScreen" , showSystemUi = true)
-@Composable
-fun PreviewSplashActivity(){
-   SplashScreenActivity()
-}
+

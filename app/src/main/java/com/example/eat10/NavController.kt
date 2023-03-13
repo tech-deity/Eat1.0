@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.eat10.ui.First
+import com.example.eat10.ui.Login
 import com.example.eat10.ui.SplashScreenActivity
 
 @Composable
@@ -17,7 +18,11 @@ fun NavController(controller: NavHostController){
         }
 
         composable(Screens.Splash.route){
-            SplashScreenActivity()
+            SplashScreenActivity(navController = controller )
+        }
+
+        composable(Screens.Login.route){
+            Login()
         }
     }
 }
